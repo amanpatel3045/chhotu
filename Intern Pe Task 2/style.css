@@ -1,0 +1,176 @@
+/* Basic Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+header {
+  background-color: #333;
+  padding: 10px;
+  text-align: center;
+  color: white;
+}
+
+header img {
+  max-width: 150px;
+  margin-bottom: 10px;
+}
+
+/* Navbar Styling */
+navbar ul {
+  list-style-type: none;
+  padding: 0;
+  text-align: center;
+  margin: 0;
+}
+
+navbar ul li {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+navbar ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.1em;
+}
+
+navbar ul li a:hover {
+  color: #feb47b;
+}
+
+.hero4 {
+  background-color: #feb47b;
+  color: white;
+  text-align: center;
+  padding: 40px 0;
+}
+
+.hero4 h1 {
+  font-size: 2.5em;
+}
+
+.hero4 h6 {
+  font-size: 1.2em;
+}
+
+.featured {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.featured h1 {
+  font-size: 2.5em;
+}
+
+.featured_products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  padding: 20px;
+}
+
+.card {
+  background: white;
+  margin: 15px;
+  width: 100%;
+  max-width: 300px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.card h6 {
+  font-size: 1.2em;
+  margin: 10px 0;
+}
+
+.card h5 {
+  font-size: 1.5em;
+  color: #333;
+  margin: 10px 0;
+}
+
+.card i.add-to-cart {
+  font-size: 1.5em;
+  color: #feb47b;
+  cursor: pointer;
+}
+
+/* Media Queries for Responsiveness */
+
+/* For small screens (mobiles) */
+@media (max-width: 768px) {
+  .hero4 h1 {
+      font-size: 2em;
+  }
+
+  .hero4 h6 {
+      font-size: 1em;
+  }
+
+  .featured h1 {
+      font-size: 2em;
+  }
+
+  .featured_products {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .card {
+      width: 90%;
+      max-width: 400px;
+  }
+
+  navbar ul li {
+      display: block;
+      margin: 10px 0;
+  }
+
+  navbar ul li a {
+      font-size: 1.2em;
+  }
+}
+
+/* For very small screens (portrait mobile devices) */
+@media (max-width: 480px) {
+  header img {
+      max-width: 120px;
+  }
+
+  .hero4 h1 {
+      font-size: 1.8em;
+  }
+
+  .hero4 h6 {
+      font-size: 0.9em;
+  }
+
+  .featured h1 {
+      font-size: 1.8em;
+  }
+
+  .featured_products {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .card {
+      width: 95%;
+      max-width: 400px;
+  }
+
+  navbar ul li {
+      font-size: 1em;
+  }
+}

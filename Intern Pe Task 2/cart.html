@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Popup styles */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            border-radius: 5px;
+            font-size: 18px;
+            z-index: 1000;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <img src="/img/logo.png" alt="Logo">
+        <navbar>
+            <ul>
+                <li>Home</li>
+                <li>Shop</li>
+                <li>Blog</li>
+                <li>About</li>
+                <li>Contact</li>
+                <li><a href="cart.html"><i class="fa-solid fa-bag-shopping"></i> Cart (<span id="cart-count">0</span>)</a></li>
+            </ul>
+        </navbar>
+    </header>
+
+    <main>
+        <h1>Your Shopping Cart</h1>
+        <div id="cart-items-container"></div>
+        <div id="cart-total">
+            <h3>Total: $<span id="total-price">0</span></h3>
+        </div>
+        <button id="proceed-checkout">Proceed to Checkout</button>
+    </main>
+
+    <!-- Popup Notification -->
+    <div id="popup" class="popup">Order placed successfully!</div>
+
+    <script>
+        // Retrieve cart items from localStorage
+        let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+        const cartCountElement = document.getElementById('cart-count');
+        const cartItemsContainer = document.getElementById('cart-items-container');
+        const totalPriceElement = document.getElementById('total-price');
+        const popup = document.getElementById('popup');
+        const proceedCheckoutButton = document.getElementById('proceed-checkout');
+
+        // Function to update the cart count in the navbar
+        function updateCartCount() {
+            cartCountElement.textContent = cartItems.length;
+        }
+
+        // Function to display items in the cart
+        function displayCartItems() {
+            cartItemsContainer.innerHTML = ''; // Clear the container before adding items
+            let totalPrice = 0;
+
+            if (cartItems.length === 0) {
+                cartItemsContainer.innerHTML = '<p>Your cart is empty.</p>';
+            } else {
+                cartItems.forEach(item => {
+                    const cartItemElement = document.createElement('div');
+                    cartItemElement.classList.add('cart-item');
+                    cartItemElement.innerHTML = `
+                        <div class="cart-item-details">
+                            <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+                            <p class="cart-item-name">${item.name}</p>
+                            <p class="cart-item-price">$${item.price}</p>
+                            <p class="cart-item-quantity">Quantity: ${item.quantity}</p>
+                            <p class="cart-item-total">Total: $${(item.price * item.quantity).toFixed(2)}</p>
+                        </div>
+                    `;
+                    cartItemsContainer.appendChild(cartItemElement);
+                    totalPrice += item.price * item.quantity;
+                });
+            }
+
+            totalPriceElement.textContent = totalPrice.toFixed(2);
+        }
+
+        // Function to handle checkout
+        function handleCheckout() {
+            // Show the success popup
+            popup.style.display = 'block';
+
+            // Remove items from localStorage (empty the cart)
+            localStorage.removeItem('cart');
+
+            // Clear the cart display
+            cartItems = [];
+            displayCartItems();
+            updateCartCount();
+
+            // Hide the popup after 3 seconds
+            setTimeout(() => {
+                popup.style.display = 'none';
+            }, 3000);
+        }
+
+        // Add event listener to proceed to checkout
+        proceedCheckoutButton.addEventListener('click', handleCheckout);
+
+        // Initialize the cart on page load
+        displayCartItems();
+        updateCartCount();
+    </script>
+</body>
+
+</html>
